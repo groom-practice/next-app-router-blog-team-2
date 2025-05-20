@@ -1,6 +1,7 @@
 import "./globals.css";
 import Link from "next/link";
-import { inter } from "@/app/ui/fonts";
+import { Inter } from "next/font/google";
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "블로그",
