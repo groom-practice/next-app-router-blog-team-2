@@ -11,7 +11,9 @@ export async function generateStaticParams() {
 }
 
 export default async function PostDetailPage({ params }) {
-  const { id } = params;
+  const resolvedParams = await params; // *수정 : 여기서 await 해주기
+  // const { id } = params;
+  const { id } = resolvedParams; // *수정 : resolvedParams에서 id 받아와야함
 
   const res = await fetch(`http://localhost:3000/api/posts/${id}`, {
     cache: "no-store",
