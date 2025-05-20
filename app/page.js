@@ -3,8 +3,9 @@ import SearchBox from "./components/SearchBox";
 
 export default async function Home({ searchParams }) {
   // 검색 및 카테고리 파라미터 설정
-  const query = searchParams?.q?.toLowerCase() || "";
-  const category = searchParams?.category || "";
+  const params = await searchParams;
+  const category = params?.category || "";
+  const query = params?.query || "";
 
   // 게시글 fetch
   const response = await fetch("http://localhost:3000/api/posts", {
