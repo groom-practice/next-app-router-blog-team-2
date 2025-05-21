@@ -37,8 +37,8 @@ export default function EditPage({ params }) {
   };
 
   return (
-    <main>
-      <h1 className="text-xl font-bold mb-4">글 수정</h1>
+    <main className="w-full max-w-7xl mx-auto bg-white shadow-md rounded-xl p-6 m-4">
+      <h1 className="text-2xl font-bold mb-6">글 수정</h1>
       <input
         className="border p-2 w-full mb-2"
         value={title}
@@ -50,7 +50,7 @@ export default function EditPage({ params }) {
         onChange={(e) => setContent(e.target.value)}
       />
       <button
-        className="bg-amber-500 text-white px-4 py-2 rounded"
+        className="bg-blue-500 text-white px-4 py-2 rounded"
         onClick={handleUpdate}
       >
         수정 완료
