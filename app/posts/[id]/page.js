@@ -60,12 +60,14 @@
 
 // 코드 수정
 "use client";
+import React from "react";
 import { use, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 export default function PostDetailPage({ params }) {
-  const { id } = use(params);
+  // const { id } = use(params);
+  const { id } = React.use(params);
   const router = useRouter();
   const [post, setPost] = useState(null);
 
