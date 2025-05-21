@@ -1,34 +1,60 @@
 // app/posts/[id]/page.js
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
-export async function generateStaticParams() {
-  const res = await fetch("http://localhost:3000/api/posts");
-  const posts = await res.json();
-
-  return posts.map((post) => ({
-    id: post.id.toString(),
-  }));
-}
-
-export default async function PostDetailPage({ params }) {
-  const resolvedParams = await params; // *수정 : 여기서 await 해주기
-  // const { id } = params;
-  const { id } = resolvedParams; // *수정 : resolvedParams에서 id 받아와야함
-
+async function getPost(id) {
   const res = await fetch(`http://localhost:3000/api/posts/${id}`, {
     cache: "no-store",
   });
 
-  if (!res.ok) {
-    return notFound();
-  }
+  if (!res.ok) return null;
+  return res.json();
+}
 
-  const post = await res.json();
+export default async function PostDetailPage({ params }) {
+  const post = await getPost(params.id);
+
+  if (!post) return notFound();
 
   return (
     <main className="p-6">
-      <h1 className="text-2xl font-bold mb-4">{post.title}</h1>
-      <p className="text-gray-700 whitespace-pre-wrap">{post.content}</p>
+      <h1 className="text-2xl font-bold mb-2">{post.title}</h1>
+      <p className="mb-4">{post.content}</p>
+
+      <div className="space-x-4">
+        {/* 수정 버튼 */}
+        <Link href={`/edit/${post.id}`} className="text-blue-600">
+          수정
+        </Link>
+
+        {/* 삭제 버튼 */}
+        <DeleteButton id={post.id} />
+      </div>
     </main>
+  );
+}
+
+// 클라이언트 컴포넌트로 분리
+'use client';
+import { useRouter } from "next/navigation";
+
+function DeleteButton({ id }) {
+  const router = useRouter();
+
+  const handleDelete = async () => {
+    const confirmed = confirm("정말 삭제하시겠습니까?");
+    if (!confirmed) return;
+
+    await fetch(`/api/posts/${id}`, {
+      method: "DELETE",
+    });
+
+    router.push("/"); // 홈으로 이동
+  };
+
+  return (
+    <button onClick={handleDelete} className="text-red-600">
+      삭제
+    </button>
   );
 }
