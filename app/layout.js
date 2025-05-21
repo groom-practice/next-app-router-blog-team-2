@@ -12,8 +12,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${inter.className} antialiased`}>
-        <header className="m-4">
-          <nav className="space-x-3">
+        <header className="border-b shadow-[0_1px_3px_#8f8f8f]">
+          <nav className="space-x-3 p-4 font-semibold">
             <Link href="/">HOME</Link>
             <Link href="/write">글 작성</Link>
           </nav>
