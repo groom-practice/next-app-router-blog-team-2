@@ -23,22 +23,24 @@ export default function WritePage() {
   };
 
   return (
-    <main>
-      <h1 className="text-xl font-bold mb-4">글 작성</h1>
+    <main className="m-4 space-y-4">
+      <h1 className="text-2xl font-semibold text-gray-800 dark:text-white">
+        📝 글 작성
+      </h1>
       <input
-        className="border p-2 w-full mb-2"
+        className="border border-gray-300 dark:border-gray-600 rounded-md p-3 w-full bg-white dark:bg-[#0d1117] text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
         placeholder="제목"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
       <textarea
-        className="border p-2 w-full h-40 mb-2"
+        className="border border-gray-300 dark:border-gray-600 rounded-md p-3 w-full h-40 bg-white dark:bg-[#0d1117] text-gray-900 dark:text-white placeholder-gray-400 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
         placeholder="내용"
         value={content}
         onChange={(e) => setContent(e.target.value)}
       />
       <button
-        className="bg-blue-500 text-white px-4 py-2 rounded"
+        className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md shadow-sm transition cursor-pointer"
         onClick={handleSubmit}
       >
         작성 완료
