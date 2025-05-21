@@ -1,6 +1,8 @@
 // app/posts/[id]/page.js
+"use client";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 async function getPost(id) {
   const res = await fetch(`http://localhost:3000/api/posts/${id}`, {
@@ -35,9 +37,6 @@ export default async function PostDetailPage({ params }) {
 }
 
 // 클라이언트 컴포넌트로 분리
-'use client';
-import { useRouter } from "next/navigation";
-
 function DeleteButton({ id }) {
   const router = useRouter();
 
