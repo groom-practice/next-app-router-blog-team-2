@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Next.js app-router 팀 프로젝트
 
-## Getting Started
+<br />
 
-First, run the development server:
+## **👥** **팀원 소개 및 역할 분담**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+| **이름** | **역할**                                                                 |
+| -------- | ------------------------------------------------------------------------ |
+| 조연경   | 글 작성 페이지 / server/client component 구분 기능 개발                  |
+| 김소연   | 공통 레이아웃 구성 / 내비게이션(링크 이동)                               |
+| 맹인영   | 글 상세페이지 / 404페이지 개발                                           |
+| 정다은   | 홈 페이지 / 글 목록 보기(검색기능, 카테고리 별 필터 기능 추가 구현) 개발 |
+| 정세은   | 글 수정 페이지 개발                                                      |
+
+<br />
+
+## 📁 페이지별 기능 정리
+
+| 페이지 경로             | 주요 기능                           | 설명                                           | 담당   |
+| ----------------------- | ----------------------------------- | ---------------------------------------------- | ------ |
+| `/` (홈)                | 게시글 목록 표시                    | 전체 게시글을 리스트 형태로 출력               | 정세은 |
+| `/posts/[id]`           | 게시글 상세 보기                    | URL의 `id`에 해당하는 게시글 내용 출력         | 맹인영 |
+| `/write`                | 게시글 작성 폼                      | 제목, 내용, 카테고리를 입력하여 새 게시글 작성 | 조연경 |
+| `/edit/[id]`            | 게시글 수정 폼                      | 기존 게시글 데이터를 불러와 수정 가능          | 정세은 |
+| `/not-found`            | 404 에러 페이지                     | 존재하지 않는 URL 접근 시 안내 페이지          | 맹인영 |
+| 전체 Layout, 네비게이션 | 헤더 (홈으로, 글 작성 링크 등 포함) | 모든 페이지에 공통 적용되는 레이아웃           | 김소연 |
+
+<br />
+
+## 🛠️ 추가 구현 기능
+
+| 기능             | 설명                                              | 관련 기술                                       | 담당   |
+| ---------------- | ------------------------------------------------- | ----------------------------------------------- | ------ |
+| 🔍 검색 기능     | URL 쿼리 (`?q=키워드`)로 게시글 제목 필터링       | `searchParams`, 서버 컴포넌트 필터링            | 정세은 |
+| 📂 카테고리 필터 | "All", "React", "Next.js", "JavaScript" 필터 버튼 | 동적 라우팅 (`/category/[name]`), 서버 컴포넌트 | 정세은 |
+
+<br />
+
+## 📁 디렉토리 구조
+
+```jsx
+app-router-blog-sample/
+├── app/                        # 📂 라우팅 및 페이지 컴포넌트 디렉토리
+│   ├── api/
+│   │   └── posts/
+│   │       ├── [id]/
+│   │       │    └── route.js
+│   │       └── route.js
+│   ├── 📂 edit/                   # ✏️ 글 수정 페이지
+│   │      └── [id]/               # 동적 라우팅: /edit/[id]
+│   │          └── page.js
+│   ├── 📂 posts/                  # 📄 글 상세 페이지
+│   │      └── [id]/               # 동적 라우팅: /posts/[id]
+│   │          └── page.js
+│   ├── 📂 write/                  # 📝 글 작성 페이지
+│   │      └── page.js
+│   ├── 📄 layout.js               # 🧱 공통 레이아웃 컴포넌트
+│   ├── 📄 not-found.js            # 🚫 404 페이지
+│   └── 📄 page.js                 # 🏠 홈 페이지 (글 목록)
+├── data/                       # 📦 데이터 처리 및 API 연동
+└── public/                     # 🖼️ 정적 파일 (이미지 등)
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<br />
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 📝 커밋 컨벤션
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| 타입     | 의미                                   | 예시                              |
+| -------- | -------------------------------------- | --------------------------------- |
+| feat     | 새로운 기능 추가                       | feat(auth): 로그인 기능 추가      |
+| fix      | 버그 수정                              | fix: 로그인 시 비밀번호 오류 수정 |
+| docs     | 문서 수정 (README등)                   | docs: README 오탈자 수정          |
+| style    | 코드 스타일 변경 (포맷팅, 세미콜론 등) | style: prettier 적용              |
+| refactor | 코드 리팩토링 (기능 변경 없음)         | refactor: 불필요한 변수 제거      |
