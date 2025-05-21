@@ -21,41 +21,39 @@ export default async function Home({ searchParams }) {
   });
 
   return (
-    <main className="p-6">
-      <div>
-        <h1 className="text-2xl font-bold mb-4">블로그 글 목록</h1>
-        <SearchBox />
-        <div className="flex gap-2 mt-2">
-          {["All", "React", "Next.js", "JavaScript"].map((cat) => (
-            <Link
-              key={cat}
-              href={cat === "All" ? "/" : `/?category=${cat}`}
-              className="text-blue-500 underline"
-            >
-              {cat}
-            </Link>
-          ))}
-        </div>
-        <ul className="mt-4">
-          {filteredPosts.length > 0 ? (
-            filteredPosts.map((post) => (
-              <li key={post.id} className="border-b py-2">
-                <Link
-                  href={`/posts/${post.id}`}
-                  className="text-lg text-blue-600"
-                >
-                  {post.title}
-                </Link>
-                <span className="ml-2 text-sm text-gray-500">
-                  [{post.category}]
-                </span>
-              </li>
-            ))
-          ) : (
-            <li> 검색 결과가 없습니다. </li>
-          )}
-        </ul>
+    <main className="m-4">
+      <h1 className="text-2xl font-bold mb-4">블로그 글 목록</h1>
+      <SearchBox />
+      <div className="flex gap-2 mt-2">
+        {["All", "React", "Next.js", "JavaScript"].map((cat) => (
+          <Link
+            key={cat}
+            href={cat === "All" ? "/" : `/?category=${cat}`}
+            className="text-blue-500 px-2 py-1 rounded hover:bg-blue-100 transition"
+          >
+            {cat}
+          </Link>
+        ))}
       </div>
+      <ul className="mt-4">
+        {filteredPosts.length > 0 ? (
+          filteredPosts.map((post) => (
+            <li key={post.id} className="border-b py-2">
+              <Link
+                href={`/posts/${post.id}`}
+                className="text-lg text-blue-600 hover:font-semibold transition-colors duration-200"
+              >
+                {post.title}
+              </Link>
+              <span className="ml-2 text-sm text-gray-500">
+                [{post.category}]
+              </span>
+            </li>
+          ))
+        ) : (
+          <li> 검색 결과가 없습니다. </li>
+        )}
+      </ul>
     </main>
   );
 }
