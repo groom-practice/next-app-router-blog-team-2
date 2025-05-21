@@ -1,10 +1,11 @@
 "use client";
-
+import React from "react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function EditPage({ params }) {
-  const { id } = params; // *수정 : use() X. -> 그냥 동기적으로 꺼내기!
+  // const { id } = params; // *수정 : use() X. -> 그냥 동기적으로 꺼내기!
+  const { id } = React.use(params); // *수정 : use() X. -> 그냥 동기적으로 꺼내기!
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const router = useRouter();
