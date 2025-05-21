@@ -5,7 +5,7 @@ export default async function Home({ searchParams }) {
   // 검색 및 카테고리 파라미터 설정
   const params = await searchParams;
   const category = params?.category || "";
-  const query = params?.query || "";
+  const query = params?.q?.toLowerCase() || "";
 
   // 게시글 fetch
   const response = await fetch("http://localhost:3000/api/posts", {
